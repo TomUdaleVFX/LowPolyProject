@@ -3,4 +3,4 @@ I couldn't get the .git hidden folder to work in the labs with gitbash so i did 
 
 Here's a link to my github to prove that it has worked however:
 
-https://github.com/GuitarTom98/LowPolyProject
+https://github.com/TomUdaleVFX/LowPolyProject
