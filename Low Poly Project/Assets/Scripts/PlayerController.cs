@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour {
 
 	void RayCastCalculation(){
 
-		if (Input.GetMouseButtonDown (0)) 
+		if (Input.GetMouseButtonDown (0) && !EventSystem.current.IsPointerOverGameObject()) 
 		{
 			Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
@@ -51,7 +53,7 @@ public class PlayerController : MonoBehaviour {
 				isMoving = true;
 			}
 		}
-
+		
 	}
 
 
