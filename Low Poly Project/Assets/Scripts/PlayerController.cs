@@ -20,7 +20,11 @@ public class PlayerController : MonoBehaviour {
 	Quaternion savedRot;
 	bool isMoving = false;
 
-	void Start() {
+    public GameObject HUDController;
+
+    public GameObject CollectiblesController;
+
+    void Start() {
 
 		myAnim = GetComponent<Animator> ();
 	
@@ -42,7 +46,7 @@ public class PlayerController : MonoBehaviour {
 
 	void RayCastCalculation(){
 
-		if (Input.GetMouseButtonDown (0) && !EventSystem.current.IsPointerOverGameObject()) 
+		if (Input.GetMouseButtonDown (0)) //&& !EventSystem.current.IsPointerOverGameObject()) 
 		{
 			Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
@@ -80,5 +84,19 @@ public class PlayerController : MonoBehaviour {
 		transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, rotSpeed * Time.deltaTime);
 
 	}
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "PickUp")
+        {
+            other.gameObject.SetActive(false);
+            HUDController.GetComponent<HUDController>().IncrementCount();
+            CollectiblesController.GetComponent<CollectiblesData>().CollectiblesCount();
+        }
+        else if (other.gameObject.tag == "DontPickUp")
+        {
+            other.gameObject.SetActive(false);
+        }
+    }
 
 }

@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.UI;
 
 public class CollectiblesController : MonoBehaviour {
 
 	public CollectiblesData[] cd;
+
+    public GameObject itemPrefab;
+    public GameObject content;
+    public GameObject addedItem;
 
 	void Awake(){
 	
@@ -103,5 +108,47 @@ public class CollectiblesController : MonoBehaviour {
 		
 		}
 	}
+
+    public void AddItemToList(GameObject go)
+    {
+
+        addedItem = Instantiate(itemPrefab);
+        addedItem.transform.SetParent(content.transform);
+        addedItem.transform.localPosition = Vector3.zero;
+        addedItem.transform.localScale = Vector3.one;
+
+        /*if (go.name.Contains("Food"))
+        {
+
+            addedItem.GetComponentInChildren<Text>().text = cd[0].collectibleDesc;
+            addedItem.transform.Find("Image").GetComponent<Image>().sprite = cd[0].collectibleImage;
+
+        }
+
+        else if (go.name.Contains("Coconut"))
+        {
+
+            addedItem.GetComponentInChildren<Text>().text = cd[1].collectibleDesc;
+            addedItem.transform.Find("Image").GetComponent<Image>().sprite = cd[1].collectibleImage;
+
+        }
+
+        else if (go.name.Contains("Stone"))
+        {
+
+            addedItem.GetComponentInChildren<Text>().text = cd[2].collectibleDesc;
+            addedItem.transform.Find("Image").GetComponent<Image>().sprite = cd[2].collectibleImage;
+
+        }
+
+         else if (go.name.Contains("Wooden Plank"))
+        {
+
+            addedItem.GetComponentInChildren<Text>().text = cd[3].collectibleDesc;
+            addedItem.transform.Find("Image").GetComponent<Image>().sprite = cd[3].collectibleImage;
+
+        }*/
+
+    }
 
 }

@@ -8,13 +8,19 @@ public class Collectibles : MonoBehaviour {
 	[SerializeField] private AudioClip clip;
 
 	CollectiblesController cc;
+    HUDController hc;
+
+    public bool playerDead = false;
 
 	void Start(){
 	
 		GameObject ccgo = GameObject.Find ("CollectiblesController");
 		cc = ccgo.GetComponent<CollectiblesController> ();
-		
-	}
+
+        GameObject hcgo = GameObject.Find("HUDController");
+        hc = hcgo.GetComponent<HUDController>();
+
+    }
 
 	void OnTriggerEnter(Collider col) {
 
@@ -26,12 +32,26 @@ public class Collectibles : MonoBehaviour {
 
 		cc.incrementCount (gameObject);
 
-		Destroy (gameObject);
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        cc.AddItemToList(gameObject);
 
+        hc.healthBar.fillAmount += 0.02f;
+
+        Destroy (gameObject);
 	}
+
+    public void PlayerIsDead()
+    {
+        if (hc.healthBar.fillAmount == 0f && playerDead == false)
+        {
+            playerDead = true;
+            Debug.Log("YOU ARE DEAD");
+        }
+    }
+
+    // Update is called once per frame
+    void Update ()
+    {
+        
+    }
 		
 }
